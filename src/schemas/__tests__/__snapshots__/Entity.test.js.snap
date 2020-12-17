@@ -18,6 +18,21 @@ Immutable.Map {
 }
 `;
 
+exports[`EntitySchema denormalization denormalizeProcessStrategy can augment the object 1`] = `
+Object {
+  "id": 1,
+  "test": "foo",
+  "type": "foo",
+}
+`;
+
+exports[`EntitySchema denormalization denormalizeProcessStrategy can return the same object 1`] = `
+Object {
+  "id": 1,
+  "type": "foo",
+}
+`;
+
 exports[`EntitySchema denormalization denormalizes an entity 1`] = `
 Object {
   "id": 1,

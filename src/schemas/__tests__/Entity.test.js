@@ -144,6 +144,37 @@ describe(`${schema.Entity.name} denormalization`, () => {
     expect(denormalize(1, mySchema, fromJS(entities))).toMatchSnapshot();
   });
 
+  describe('denormalizeProcessStrategy', () => {
+    test('can return the same object', () => {
+      const mySchema = new schema.Entity('tacos', {}, { denormalizeProcessStrategy: (item) => item });
+      const entities = {
+        tacos: {
+          1: { id: 1, type: 'foo' },
+        },
+      };
+      expect(denormalize(1, mySchema, entities)).toMatchSnapshot();
+    });
+
+    test('can augment the object', () => {
+      const mySchema = new schema.Entity(
+        'tacos',
+        {},
+        {
+          denormalizeProcessStrategy: (item) => {
+            item.test = item.type;
+            return item;
+          },
+        }
+      );
+      const entities = {
+        tacos: {
+          1: { id: 1, type: 'foo' },
+        },
+      };
+      expect(denormalize(1, mySchema, entities)).toMatchSnapshot();
+    });
+  });
+
   test('denormalizes deep entities', () => {
     const foodSchema = new schema.Entity('foods');
     const menuSchema = new schema.Entity('menus', {

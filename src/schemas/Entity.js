@@ -16,6 +16,7 @@ export default class EntitySchema {
       },
       processStrategy = (input) => ({ ...input }),
       fallbackStrategy = (key, schema) => undefined,
+      denormalizeProcessStrategy = (input) => input,
     } = options;
 
     this._key = key;
@@ -24,6 +25,7 @@ export default class EntitySchema {
     this._mergeStrategy = mergeStrategy;
     this._processStrategy = processStrategy;
     this._fallbackStrategy = fallbackStrategy;
+    this._denormalizeProcessStrategy = denormalizeProcessStrategy;
     this.define(definition);
   }
 
@@ -100,6 +102,8 @@ export default class EntitySchema {
         entity[key] = unvisit(entity[key], schema);
       }
     });
-    return entity;
+
+    const processedEntity = this._denormalizeProcessStrategy(entity);
+    return processedEntity;
   }
 }

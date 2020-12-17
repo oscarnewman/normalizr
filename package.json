@@ -1,5 +1,5 @@
 {
-  "name": "normalizr",
+  "name": "@oscarnewman/normalizr",
   "version": "3.6.1",
   "description": "Normalizes and denormalizes JSON according to schema for Redux and Flux applications",
   "bugs": {
